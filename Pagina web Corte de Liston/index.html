@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyecto Integrador</title>
+    <link rel="stylesheet" type="text/css" href="estilo.css" />
+  </head>
+  <body>
+    <h1>Cortes de listones</h1>
+    <input type="text" id="miCorte" />
+    <button id="miBoton">Aplicar corte</button>
+    <p id="resultado"></p>
+
+    <script>
+      document.getElementById("miBoton").addEventListener("click", function () {
+        const arrCortes = document.getElementById("miCorte").value.split("-");
+        for (let corte of arrCortes) {
+          console.log(corte);
+        }
+        console.log(JSON.stringify({ cortes: arrCortes }));
+        document.getElementById("resultado").innerText = arrCortes.join(", ");
+      });
+    </script>
+    <nav>
+      <ul>
+        <li><a href="">Menu</a></li>
+        <li><a href="">Tablones cuadrados</a></li>
+        <li><a href="">Ofertas</a></li>
+        <li><a href="">Soporte</a></li>
+      </ul>
+    </nav>
+    <div class="contenido">
+      <div class="articulos">
+        <div class="secciones">
+          <div>
+            <h2>Listón de Madera Largo:</h2>
+            <p>
+              Este listón de madera largo es ideal para proyectos de
+              construcción que requieren estabilidad y durabilidad. Con una
+              longitud extendida, es perfecto para aplicaciones que necesitan
+              cubrir grandes áreas, como vigas de soporte, revestimientos o
+              muebles de gran tamaño. Fabricado en madera de alta calidad,
+              ofrece resistencia y un acabado natural que puede ser tratado para
+              adaptarse a cualquier estilo o ambiente.
+            </p>
+          </div>
+          <div><img src="img/liston1.jpg" /></div>
+        </div>
+        <div class="secciones">
+          <div>
+            <h2>Listón de Madera Cuadrado:</h2>
+            <p>
+              El listón de madera cuadrado es una opción versátil y compacta,
+              ideal para trabajos de precisión. Su forma geométrica permite un
+              fácil manejo y colocación en estructuras como marcos, paneles
+              decorativos o muebles pequeños. El acabado liso y la alta
+              resistencia de la madera utilizada hacen de este listón una
+              excelente opción tanto para proyectos artesanales como
+              industriales.
+            </p>
+          </div>
+          <div><img src="img/liston2.jpg" /></div>
+        </div>
+        <div class="secciones">
+          <div>
+            <h2>Listón de Metal:</h2>
+            <p>
+              Este listón de metal es perfecto para proyectos que requieren
+              mayor resistencia estructural. Fabricado en acero galvanizado, es
+              resistente a la corrosión, lo que lo convierte en una excelente
+              opción para aplicaciones en exteriores o áreas con alta exposición
+              a humedad. Su rigidez y durabilidad lo hacen adecuado para
+              soportar cargas pesadas, siendo ideal para refuerzos, estructuras
+              metálicas o ensamblajes de maquinaria.
+            </p>
+          </div>
+          <div><img src="img/liston3.jpg" /></div>
+        </div>
+      </div>
+      <div class="menu-secundario">
+        <a href="">Mas Articulos</a>
+        <a href="">Mas Articulos</a>
+        <a href="">Mas Articulos</a>
+        <a href="">Mas Articulos</a>
+        <a href="">Mas Articulos</a>
+        <a href="">Mas Articulos</a>
+      </div>
+    </div>
+    <footer>
+      <p>
+        © 2024 Uocra. Todos los derechos reservados. Dirección: Calle Falsa 123,
+        Buenos Aires, Argentina | Teléfono: +54 11-456-7890 | Correo
+        electrónico: programacionuocra@hotmail.com | Sitio web:
+        www.programacionenuocra.com
+        <br />Política de privacidad | Términos y condiciones | Mapa del sitio
+      </p>
+    </footer>
+  </body>
+</html>
