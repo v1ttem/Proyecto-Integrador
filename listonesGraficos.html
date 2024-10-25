@@ -4,11 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gráfico de Cortes de Listones</title>
-
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
+
+    <style>
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+    </style>
 
     <script
       type="text/javascript"
@@ -17,50 +27,60 @@
     <script type="text/javascript">
       google.charts.load("current", { packages: ["corechart"] });
 
+      const MAX_CUT_300 = 300;
+      const MAX_CUT_420 = 420;
+
+      function getCorteValues(prefix) {
+        return Array.from({ length: 5 }, (_, i) => {
+          const value = parseInt(
+            document.getElementById(`${prefix}_${i + 1}`).value
+          );
+          return isNaN(value) ? 0 : value;
+        });
+      }
+
+      function validateCuts() {
+        const cuts300 = getCorteValues("corte300");
+        const cuts420 = getCorteValues("corte420");
+
+        for (let i = 0; i < cuts300.length; i++) {
+          if (cuts300[i] > MAX_CUT_300) {
+            alert(
+              `El corte ${
+                i + 1
+              } para el listón de 300 metros supera el límite de ${MAX_CUT_300} metros.`
+            );
+            return false;
+          }
+        }
+
+        for (let i = 0; i < cuts420.length; i++) {
+          if (cuts420[i] > MAX_CUT_420) {
+            alert(
+              `El corte ${
+                i + 1
+              } para el listón de 420 metros supera el límite de ${MAX_CUT_420} metros.`
+            );
+            return false;
+          }
+        }
+
+        return true;
+      }
+
       function drawChart() {
-        var corte300_1 = parseInt(document.getElementById("corte300_1").value);
-        var corte300_2 = parseInt(document.getElementById("corte300_2").value);
-        var corte300_3 = parseInt(document.getElementById("corte300_3").value);
-        var corte300_4 = parseInt(document.getElementById("corte300_4").value);
-        var corte300_5 = parseInt(document.getElementById("corte300_5").value);
+        if (!validateCuts()) return;
 
-        var corte420_1 = parseInt(document.getElementById("corte420_1").value);
-        var corte420_2 = parseInt(document.getElementById("corte420_2").value);
-        var corte420_3 = parseInt(document.getElementById("corte420_3").value);
-        var corte420_4 = parseInt(document.getElementById("corte420_4").value);
-        var corte420_5 = parseInt(document.getElementById("corte420_5").value);
+        const cortes300 = getCorteValues("corte300");
+        const cortes420 = getCorteValues("corte420");
 
-        var data = google.visualization.arrayToDataTable([
-          [
-            "Listones",
-            "Corte 1",
-            "Corte 2",
-            "Corte 3",
-            "Corte 4",
-            "Corte 5",
-            { role: "annotation" },
-          ],
-          [
-            "300 metros",
-            corte300_1,
-            corte300_2,
-            corte300_3,
-            corte300_4,
-            corte300_5,
-            "",
-          ],
-          [
-            "420 metros",
-            corte420_1,
-            corte420_2,
-            corte420_3,
-            corte420_4,
-            corte420_5,
-            "",
-          ],
+        const data = google.visualization.arrayToDataTable([
+          ["Listones", "Corte 1", "Corte 2", "Corte 3", "Corte 4", "Corte 5"],
+          ["300 metros", ...cortes300],
+          ["420 metros", ...cortes420],
         ]);
 
-        var options = {
+        const options = {
           width: "100%",
           height: 400,
           legend: { position: "top", maxLines: 3 },
@@ -69,7 +89,7 @@
           colors: ["#FF5733", "#33FF57", "#3357FF", "#F39C12", "#8E44AD"],
         };
 
-        var chart = new google.visualization.ColumnChart(
+        const chart = new google.visualization.ColumnChart(
           document.getElementById("chart_div")
         );
         chart.draw(data, options);
@@ -83,78 +103,68 @@
       <div class="row">
         <div class="col-md-6">
           <h5>Listón de 300 metros</h5>
-          <label for="corte300_1">Corte 1:</label>
           <input
             id="corte300_1"
             type="number"
-            class="form-control"
+            class="form-control mb-2"
             value="100"
           />
-          <label for="corte300_2">Corte 2:</label>
           <input
             id="corte300_2"
             type="number"
-            class="form-control"
+            class="form-control mb-2"
             value="50"
           />
-          <label for="corte300_3">Corte 3:</label>
           <input
             id="corte300_3"
             type="number"
-            class="form-control"
+            class="form-control mb-2"
             value="150"
           />
-          <label for="corte300_4">Corte 4:</label>
           <input
             id="corte300_4"
             type="number"
-            class="form-control"
+            class="form-control mb-2"
             value="75"
           />
-          <label for="corte300_5">Corte 5:</label>
           <input
             id="corte300_5"
             type="number"
-            class="form-control"
+            class="form-control mb-2"
             value="30"
           />
         </div>
 
         <div class="col-md-6">
           <h5>Listón de 420 metros</h5>
-          <label for="corte420_1">Corte 1:</label>
           <input
             id="corte420_1"
             type="number"
-            class="form-control"
+            class="form-control mb-2"
             value="120"
           />
-          <label for="corte420_2">Corte 2:</label>
           <input
             id="corte420_2"
             type="number"
-            class="form-control"
+            class="form-control mb-2"
             value="180"
           />
-          <label for="corte420_3">Corte 3:</label>
           <input
             id="corte420_3"
             type="number"
-            class="form-control"
+            class="form-control mb-2"
             value="120"
           />
-          <label for="corte420_4">Corte 4:</label>
           <input
             id="corte420_4"
             type="number"
-            class="form-control"
+            class="form-control mb-2"
             value="50"
           />
-          <label for="corte420_5">Corte 5:</label>
           <input
             id="corte420_5"
             type="number"
-            class="form-control"
+            class="form-control mb-2"
             value="90"
           />
         </div>
