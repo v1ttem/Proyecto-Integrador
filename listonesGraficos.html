@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gráfico de Cortes de Listones</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <script type="text/javascript">
+      google.charts.load("current", { packages: ["corechart"] });
+
+      function drawChart() {
+        var corte300_1 = parseInt(document.getElementById("corte300_1").value);
+        var corte300_2 = parseInt(document.getElementById("corte300_2").value);
+        var corte300_3 = parseInt(document.getElementById("corte300_3").value);
+        var corte300_4 = parseInt(document.getElementById("corte300_4").value);
+        var corte300_5 = parseInt(document.getElementById("corte300_5").value);
+
+        var corte420_1 = parseInt(document.getElementById("corte420_1").value);
+        var corte420_2 = parseInt(document.getElementById("corte420_2").value);
+        var corte420_3 = parseInt(document.getElementById("corte420_3").value);
+        var corte420_4 = parseInt(document.getElementById("corte420_4").value);
+        var corte420_5 = parseInt(document.getElementById("corte420_5").value);
+
+        var data = google.visualization.arrayToDataTable([
+          [
+            "Listones",
+            "Corte 1",
+            "Corte 2",
+            "Corte 3",
+            "Corte 4",
+            "Corte 5",
+            { role: "annotation" },
+          ],
+          [
+            "300 metros",
+            corte300_1,
+            corte300_2,
+            corte300_3,
+            corte300_4,
+            corte300_5,
+            "",
+          ],
+          [
+            "420 metros",
+            corte420_1,
+            corte420_2,
+            corte420_3,
+            corte420_4,
+            corte420_5,
+            "",
+          ],
+        ]);
+
+        var options = {
+          width: "100%",
+          height: 400,
+          legend: { position: "top", maxLines: 3 },
+          bar: { groupWidth: "75%" },
+          isStacked: true,
+          colors: ["#FF5733", "#33FF57", "#3357FF", "#F39C12", "#8E44AD"],
+        };
+
+        var chart = new google.visualization.ColumnChart(
+          document.getElementById("chart_div")
+        );
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2 class="text-center mb-4">Gráfico de Cortes de Listones</h2>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h5>Listón de 300 metros</h5>
+          <label for="corte300_1">Corte 1:</label>
+          <input
+            id="corte300_1"
+            type="number"
+            class="form-control"
+            value="100"
+          />
+          <label for="corte300_2">Corte 2:</label>
+          <input
+            id="corte300_2"
+            type="number"
+            class="form-control"
+            value="50"
+          />
+          <label for="corte300_3">Corte 3:</label>
+          <input
+            id="corte300_3"
+            type="number"
+            class="form-control"
+            value="150"
+          />
+          <label for="corte300_4">Corte 4:</label>
+          <input
+            id="corte300_4"
+            type="number"
+            class="form-control"
+            value="75"
+          />
+          <label for="corte300_5">Corte 5:</label>
+          <input
+            id="corte300_5"
+            type="number"
+            class="form-control"
+            value="30"
+          />
+        </div>
+
+        <div class="col-md-6">
+          <h5>Listón de 420 metros</h5>
+          <label for="corte420_1">Corte 1:</label>
+          <input
+            id="corte420_1"
+            type="number"
+            class="form-control"
+            value="120"
+          />
+          <label for="corte420_2">Corte 2:</label>
+          <input
+            id="corte420_2"
+            type="number"
+            class="form-control"
+            value="180"
+          />
+          <label for="corte420_3">Corte 3:</label>
+          <input
+            id="corte420_3"
+            type="number"
+            class="form-control"
+            value="120"
+          />
+          <label for="corte420_4">Corte 4:</label>
+          <input
+            id="corte420_4"
+            type="number"
+            class="form-control"
+            value="50"
+          />
+          <label for="corte420_5">Corte 5:</label>
+          <input
+            id="corte420_5"
+            type="number"
+            class="form-control"
+            value="90"
+          />
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <button onclick="drawChart()" class="btn btn-primary">
+          Generar Gráfico
+        </button>
+      </div>
+
+      <div id="chart_div" class="border rounded p-3 bg-light mt-4"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
